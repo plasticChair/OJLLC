@@ -1141,12 +1141,41 @@ svg.lucide,
 
   .hero-portrait {
     justify-self: center;
-    max-width: 380px;
+    max-width: 340px;
+    margin-bottom: 28px;
     order: -1;
   }
 
+  .hero-portrait::before {
+    inset: 5% -7% -5% -7%;
+    transform: rotate(-4deg);
+  }
+
   .portrait-badge {
-    left: -16px;
+    left: 50%;
+    bottom: -28px;
+    width: max-content;
+    max-width: calc(100% - 24px);
+    transform: translateX(-50%);
+  }
+
+  .hero::before {
+    inset: -10% 0 auto 50%;
+    width: 120vw;
+    height: 120vw;
+    transform: translateX(-50%);
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-description {
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
   }
 
 }
@@ -1199,16 +1228,7 @@ svg.lucide,
     width: 100%;
   }
 
-  .portrait-badge {
-    left: 50%;
-    bottom: -28px;
-    width: max-content;
-    max-width: calc(100% - 24px);
-    transform: translateX(-50%);
-  }
-
   .hero-portrait {
-    margin-bottom: 28px;
     max-width: 250px;
   }
 
