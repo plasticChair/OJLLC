@@ -1,0 +1,25 @@
+{
+  "name": "olivia-jay-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "worker:dev": "npm run build && wrangler dev --ip 127.0.0.1",
+    "deploy": "npm run build && wrangler deploy",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "lucide": "^1.61.0"
+  },
+  "devDependencies": {
+    "handlebars": "^4.7.10",
+    "markdown-it": "^15.0.3",
+    "markdown-it-front-matter": "^0.2.4",
+    "vite": "^8.3.5",
+    "wrangler": "^4.152.0",
+    "yaml": "^2.9.1"
+  }
+}

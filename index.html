@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbf8f4" />
+    <meta name="description" content="{{site.description}}" />
+    <meta property="og:title" content="{{site.page_title}}" />
+    <meta property="og:description" content="{{site.social_description}}" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <title>{{site.page_title}}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{{site.skip_label}}</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="{{site.home_label}}"><span class="brand-mark" aria-hidden="true"></span>{{site.name}}{{#if site.brand_suffix}} <span class="brand-suffix">{{site.brand_suffix}}</span>{{/if}}</a>
+        <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="{{site.open_navigation_label}}" title="{{site.open_navigation_label}}">
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
+        <nav id="main-nav" class="main-nav" aria-label="{{site.navigation_label}}">
+          {{#each site.navigation}}
+          <a href="{{href}}">{{label}}</a>
+          {{/each}}
+          <a class="button button-small" href="{{site.navigation_cta_href}}">{{site.navigation_cta}}</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="top" class="hero" aria-labelledby="hero-heading">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="pill"><span class="pill-dot" aria-hidden="true"></span>{{hero.eyebrow}}</p>
+            <h1 id="hero-heading">{{site.name}}</h1>
+            <p class="hero-tagline">{{{hero.tagline_html}}}</p>
+            <div class="hero-description">{{{hero.body_html}}}</div>
+            <div class="hero-actions">
+              <a class="button" href="{{hero.primary_href}}">{{hero.primary_label}} <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+              <a class="button button-ghost" href="{{hero.secondary_href}}"><i data-lucide="play" aria-hidden="true"></i> {{hero.secondary_label}}</a>
+            </div>
+            <p class="hero-meta"><i data-lucide="map-pin" aria-hidden="true"></i>{{site.location}}</p>
+          </div>
+          <figure class="hero-portrait">
+            <div class="portrait-frame">
+              <img src="{{hero.image}}" alt="{{hero.image_alt}}" width="800" height="800" fetchpriority="high" />
+            </div>
+            <figcaption class="portrait-badge">
+              <span class="badge-icon"><i data-lucide="sparkles" aria-hidden="true"></i></span>
+              <span><small>{{hero.badge_label}}</small>{{hero.badge_text}}</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="highlights" class="highlights" aria-label="{{highlights.accessible_label}}">
+        <div class="container highlights-inner">
+          <p class="highlights-intro">{{{highlights.intro_html}}}</p>
+          {{#each highlights.highlights}}
+          <div class="highlight"><strong>{{value}}</strong><span>{{label}}</span></div>
+          {{/each}}
+        </div>
+      </section>
+
+      <section id="services" class="section services" aria-labelledby="services-heading">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">{{services.eyebrow}}</p>
+              <h2 id="services-heading">{{{services.heading_html}}}</h2>
+            </div>
+            <div class="section-intro">{{{services.body_html}}}</div>
+          </div>
+          <div class="service-grid">
+            {{#each services_items}}
+            <article class="service-card">
+              <div class="service-top"><span class="service-icon"><i data-lucide="{{icon}}" aria-hidden="true"></i></span><span class="item-number">{{number @index}}</span></div>
+              <h3>{{{title_html}}}</h3>
+              <div class="service-body">{{{body_html}}}</div>
+              <a class="text-link" href="#contact">{{link_label}} <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+            </article>
+            {{/each}}
+          </div>
+        </div>
+      </section>
+
+      <section id="video" class="section video-section" aria-labelledby="video-heading">
+        <div class="container video-grid">
+          <div class="video-copy">
+            <p class="eyebrow"><i data-lucide="video" aria-hidden="true"></i> {{video.eyebrow}}</p>
+            <h2 id="video-heading">{{{video.heading_html}}}</h2>
+            {{{video.body_html}}}
+            {{#if video.duration}}<p class="video-duration"><i data-lucide="clock" aria-hidden="true"></i> {{video.duration}}</p>{{/if}}
+            {{#if video.highlights.length}}
+            <h3 class="list-heading">{{video.highlights_heading}}</h3>
+            <ul class="check-list">
+              {{#each video.highlights}}
+              <li><i data-lucide="check" aria-hidden="true"></i><span>{{this}}</span></li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+          <div class="video-media">
+            <div class="video-frame">
+              {{#if video.player.is_embed}}
+              <iframe src="{{video.player.src}}" title="{{video.video_title}}" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              {{else if video.player.is_file}}
+              <video controls playsinline preload="metadata" title="{{video.video_title}}"{{#if video.poster}} poster="{{video.poster}}"{{/if}}>
+                <source src="{{video.player.src}}" type="{{video.player.mime}}" />
+              </video>
+              {{else}}
+              <div class="video-placeholder">
+                <span class="play-orb" aria-hidden="true"><i data-lucide="play" aria-hidden="true"></i></span>
+                <p class="placeholder-heading">{{{video.placeholder_heading_html}}}</p>
+                <p>{{video.placeholder_text}}</p>
+                <a class="text-link" href="{{site.linkedin_url}}" target="_blank" rel="noopener noreferrer">{{video.placeholder_label}} <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+              </div>
+              {{/if}}
+            </div>
+            {{#if video.player.is_embed}}
+            <p class="video-fallback">{{video.fallback_label}} <a href="{{video.player.watch_url}}" target="_blank" rel="noopener noreferrer">{{video.player.provider_name}} <i data-lucide="arrow-up-right" aria-hidden="true"></i></a></p>
+            {{/if}}
+          </div>
+        </div>
+        {{#if video.transcript_html}}
+        <div class="container">
+          <details class="transcript">
+            <summary>{{video.transcript_label}} <i data-lucide="chevron-down" aria-hidden="true"></i></summary>
+            <div class="transcript-body">{{{video.transcript_html}}}</div>
+          </details>
+        </div>
+        {{/if}}
+      </section>
+
+      <section id="about" class="section about" aria-labelledby="about-heading">
+        <div class="container about-grid">
+          <div>
+            <p class="eyebrow">{{about.eyebrow}}</p>
+            <h2 id="about-heading">{{{about.heading_html}}}</h2>
+            {{#if about.quote}}
+            <blockquote class="quote-card">
+              <i data-lucide="quote" aria-hidden="true"></i>
+              <p>{{{about.quote_html}}}</p>
+              {{#if about.quote_source}}<footer>{{about.quote_source}}</footer>{{/if}}
+            </blockquote>
+            {{/if}}
+          </div>
+          <div class="about-body">
+            {{{about.body_html}}}
+            <div class="about-details">
+              {{#if about.education}}
+              <p class="detail"><span class="detail-icon"><i data-lucide="graduation-cap" aria-hidden="true"></i></span><span><small>{{about.education_label}}</small>{{about.education}}</span></p>
+              {{/if}}
+              <p class="detail"><span class="detail-icon"><i data-lucide="map-pin" aria-hidden="true"></i></span><span><small>{{about.location_label}}</small>{{site.location}}</span></p>
+            </div>
+            <a class="text-link" href="{{site.linkedin_url}}" target="_blank" rel="noopener noreferrer">{{about.link_label}} <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </section>
+
+      <section id="approach" class="section approach" aria-labelledby="approach-heading">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">{{approach.eyebrow}}</p>
+              <h2 id="approach-heading">{{{approach.heading_html}}}</h2>
+            </div>
+            <div class="section-intro">{{{approach.body_html}}}</div>
+          </div>
+          <ol class="approach-grid">
+            {{#each approach.steps}}
+            <li class="approach-step">
+              <span class="step-number">{{number @index}}</span>
+              <h3>{{{title_html}}}</h3>
+              <p>{{description}}</p>
+            </li>
+            {{/each}}
+          </ol>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact" aria-labelledby="contact-heading">
+        <div class="container">
+          <div class="contact-card">
+            <p class="eyebrow">{{contact.eyebrow}}</p>
+            <h2 id="contact-heading">{{{contact.heading_html}}}</h2>
+            {{{contact.body_html}}}
+            <div class="contact-actions">
+              {{#if contact.email}}
+              <a class="button button-light" href="{{mailto contact.email}}"><i data-lucide="mail" aria-hidden="true"></i> {{contact.email_label}}</a>
+              {{/if}}
+              <a class="button {{#if contact.email}}button-outline{{else}}button-light{{/if}}" href="{{site.linkedin_url}}" target="_blank" rel="noopener noreferrer">{{linkedin_icon}} {{contact.linkedin_label}}</a>
+              {{#if contact.resume_url}}
+              <a class="button button-outline" href="{{contact.resume_url}}" target="_blank" rel="noopener"><i data-lucide="file-text" aria-hidden="true"></i> {{contact.resume_label}}</a>
+              {{/if}}
+            </div>
+            <p class="contact-location"><i data-lucide="map-pin" aria-hidden="true"></i> {{site.location}}</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year">2026</span> {{site.name}}{{#if site.brand_suffix}} {{site.brand_suffix}}{{/if}}</p>
+        <p class="footer-note">{{site.footer_note}}</p>
+        <div class="footer-links">
+          <a href="{{site.linkedin_url}}" target="_blank" rel="noopener noreferrer" aria-label="{{site.linkedin_label}}" title="{{site.linkedin_label}}">{{linkedin_icon}}</a>
+          <a href="#top" aria-label="{{site.back_to_top_label}}" title="{{site.back_to_top_label}}"><i data-lucide="arrow-up" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

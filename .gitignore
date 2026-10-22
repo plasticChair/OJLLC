@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+# LinkedIn export used as source material; it includes other people's profiles.
+/*.pdf
